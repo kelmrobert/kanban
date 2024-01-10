@@ -4,7 +4,7 @@
       {{ task.title }}
     </div>
     <div class="card-body">
-      <p class="card-text" :class="{ 'trim': !showAll }" @click="trimText()">
+      <p class="card-text" :class="{ 'toggle': !showAll }" @click="toggleText()">
         {{ task.text }}
       </p>
     </div>
@@ -26,7 +26,7 @@
       task: Object
     },
     methods: {
-      trimText() {
+      toggleText() {
         this.showAll = !this.showAll;
       }
     },
@@ -39,7 +39,7 @@
 </script>
 
 <style>
-  .trim {
+  .toggle {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
