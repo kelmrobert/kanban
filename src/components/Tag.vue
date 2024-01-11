@@ -11,6 +11,7 @@
       tag: String
     },
     computed: {
+      // Define badge color based of table in task
       badgeColor() {
         switch (this.tag) {
           case 'Feature':

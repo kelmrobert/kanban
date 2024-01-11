@@ -2,6 +2,7 @@
   <h4 class="text-light mt-5">
     {{ column.name }}
   </h4>
+  <!-- Create new div for TaskCard -->
   <div v-for="task in column.tasks" :key=task.id class="mb-3">
     <TaskCard :task=task></TaskCard>
   </div>

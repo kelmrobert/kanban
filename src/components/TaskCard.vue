@@ -27,7 +27,7 @@
     },
     methods: {
       toggleText() {
-        this.showAll = !this.showAll;
+        this.showAll = !this.showAll; // Invert boolean on mouse click
       }
     },
     data() {
