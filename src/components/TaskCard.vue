@@ -1,47 +1,44 @@
-<template>
-  <div class="card mt-3">
-    <div class="card-header card-title">
-      {{ task.title }}
-    </div>
-    <div class="card-body">
-      <p class="card-text" :class="{ 'toggle': !showAll }" @click="toggleText()">
-        {{ task.text }}
-      </p>
-    </div>
-    <div class="card-footer">
-      <Tag v-for="tag in task.tags" :tag=tag></Tag>
-    </div>
-  </div>
-</template>
+<script setup>
+	import { ref } from 'vue';
+	import Tag from './Tag.vue'
 
-<script>
-  import Tag from "@/components/Tag.vue";
+	defineProps({
+		task: {
+            type: Object,
+			required: true
+        }
+	});
 
-  export default {
+	let collapsed = ref('collapsed')
 
-    components: {
-      Tag
-    },
-    props: {
-      task: Object
-    },
-    methods: {
-      toggleText() {
-        this.showAll = !this.showAll; // Invert boolean on mouse click
-      }
-    },
-    data() {
-      return {
-        showAll: false
-      };
-    }
-  }
+	function toggleCollapsed() {
+		if(collapsed.value.length === 0) {
+			collapsed.value = 'collapsed'
+		} else {
+			collapsed.value = ''
+		}
+	}
 </script>
 
-<style>
-  .toggle {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
+<template>
+	<div class="card bg-light mt-3">
+        <h5 class="card-header collapsed">{{ task.title }}</h5>
+
+
+        <div :class="['card-body', collapsed]" @click="toggleCollapsed()">
+			{{ task.text }}
+		</div>
+		<div class="card-footer">
+			<Tag v-for="tag in task.tags" :tag-value="tag" />
+		</div>
+	</div>
+</template>
+
+<style scoped>
+	.collapsed {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		cursor: pointer;
+	}
 </style>

@@ -1,23 +1,20 @@
-<template>
-  <div class="container">
-    <div class="row">
-      <!-- Create new div for every column -->
-      <div v-for="column in columns" :key="column.id" class="col-lg-4 col-md-6 col-sm-12">
-        <Column :column=column></Column>
-      </div>
-    </div>
-  </div>
-</template>
+<script setup>
+	import Column from './Column.vue';
 
-<script>
-  import Column from "@/components/Column.vue";
-
-  export default {
-    components: {
-      Column
-    },
-    props: {
-      columns: Array
-    }
-  };
+	defineProps({
+		columns: {
+            type: Array,
+			required: true
+		}
+	});
 </script>
+
+<template>
+	<div class="container">
+		<div class="row">
+			<div v-for="column in columns" class="col-12 col-md-6 col-lg-4">
+                <Column :key="column.id" :column="column" />
+			</div>
+		</div>
+	</div>
+</template>
