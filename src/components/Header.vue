@@ -27,7 +27,7 @@ defineProps({
                 {{ title }}
             </span>
 
-            <!-- TODO: button -->
+            <button :id=BUTTON_TOGGLE_MODAL_ID class="btn btn-outline-primary">Create new task</button>
         </div>
     </nav>
 </template>x
