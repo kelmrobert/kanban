@@ -43,7 +43,11 @@ defineProps({
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>Modal body text goes here.</p>
+            <div class="mb-3">
+              <label class="form-label">Task Title</label>
+              <input :id="MODAL_INPUT_TITLE_ID" class="form-control" type="text" maxlength="50">
+              <div :id="MODAL_HELPER_TITLE_ID" class="form-text">0/50 characters</div>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
