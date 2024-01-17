@@ -46,7 +46,12 @@ defineProps({
                 {{ column.name }}
               </option>
             </select>
-            <button :id="MODAL_BUTTON_X_ID" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button :id="MODAL_BUTTON_X_ID"
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close">
+            </button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
@@ -59,10 +64,13 @@ defineProps({
               <textarea :id="MODAL_INPUT_TEXT_ID" class="form-control"></textarea>
             </div>
             <div class="mb-3 dropdown">
-              <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Select tags
+              <button :id="MODAL_DROPDOWN_TRIGGER_ID"
+                      class="btn btn-outline-primary dropdown-toggle"
+                      type="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Select tags
               </button>
-              <ul class="dropdown-menu form-check">
+              <ul :id="MODAL_DROPDOWN_MENU_ID" class="dropdown-menu form-check">
                 <li class="dropdown-item form-check" v-for="tag in tags">
                   <input type="checkbox" id="{{ MODAL_CHECKBOX_BASE_ID + tag }}" class="me-2 form-check-inline">
                   <Tag :tagValue="tag"></Tag>
