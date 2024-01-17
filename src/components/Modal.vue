@@ -48,6 +48,10 @@ defineProps({
               <input :id="MODAL_INPUT_TITLE_ID" class="form-control" type="text" maxlength="50">
               <div :id="MODAL_HELPER_TITLE_ID" class="form-text">0/50 characters</div>
             </div>
+            <div class="mb-3">
+              <label class="form-label">Task Description</label>
+              <textarea :id="MODAL_INPUT_TEXT_ID" class="form-control"></textarea>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
