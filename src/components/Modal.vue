@@ -1,5 +1,7 @@
 <script setup>
 
+import Tag from "@/components/Tag.vue";
+
 ///////////////////////////////////////////////
 // IDs to be used for the respective DOM elements in the template
 ///////////////////////////////////////////////
@@ -61,7 +63,9 @@ defineProps({
                 Select tags
               </button>
               <ul class="dropdown-menu">
-                <li></li>
+                <li v-for="tag in tags">
+                  <Tag :tagValue="tag"></Tag>
+                </li>
               </ul>
             </div>
           </div>
