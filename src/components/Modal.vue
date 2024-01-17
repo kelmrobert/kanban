@@ -4,7 +4,7 @@
 // IDs to be used for the respective DOM elements in the template
 ///////////////////////////////////////////////
 
-const MODAL_ID = 'modalRoot' // for the modal's root element
+const MODAL_ID = 'createModal' // for the modal's root element
 const MODAL_SELECT_COLUMN_ID = 'modalSelectColumn' // for the selector in the modal's header
 const MODAL_BUTTON_X_ID = 'modalButtonX'
 const MODAL_INPUT_TITLE_ID = 'modalInputTitle' // for the input where users enter the task's title
@@ -20,6 +20,12 @@ const MODAL_BUTTON_SUBMIT = 'modalButtonSubmit' // for the modal's submit button
 // Your implementation below
 ///////////////////////////////////////////////
 
+defineProps({
+  columns: {
+    type: Array,
+    required: true
+  }
+});
 
 </script>
 
