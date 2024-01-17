@@ -63,5 +63,5 @@ onMounted(() => {
     <!-- TODO: add Modal component and event handling -->
     <Header :title="title" />
     <Board :columns="columns" />
-    <Modal :columns="columns" />
+    <Modal :columns="columns" :tags="tags" />
 </template>

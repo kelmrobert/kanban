@@ -24,6 +24,10 @@ defineProps({
   columns: {
     type: Array,
     required: true
+  },
+  tags: {
+    type: Array,
+    required: true
   }
 });
 
