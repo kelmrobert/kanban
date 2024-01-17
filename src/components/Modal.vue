@@ -34,7 +34,12 @@ defineProps({
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">Create Task in</h5>
+            <select :id="MODAL_SELECT_COLUMN_ID" class="form-select ms-2 w-auto">
+              <option v-for="column in columns">
+                {{ column.name }}
+              </option>
+            </select>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
