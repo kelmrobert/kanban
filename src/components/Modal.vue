@@ -52,6 +52,14 @@ defineProps({
               <label class="form-label">Task Description</label>
               <textarea :id="MODAL_INPUT_TEXT_ID" class="form-control"></textarea>
             </div>
+            <div class="mb-3 dropdown">
+              <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Select tags
+              </button>
+              <ul class="dropdown-menu">
+                <li></li>
+              </ul>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
