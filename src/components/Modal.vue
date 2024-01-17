@@ -33,6 +33,11 @@ defineProps({
   }
 });
 
+function updateCharacters(){
+  let numOfChars = document.getElementById(MODAL_INPUT_TITLE_ID).value.length;
+  document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
+}
+
 </script>
 
 <template>
@@ -56,7 +61,7 @@ defineProps({
           <div class="modal-body">
             <div class="mb-3">
               <label class="form-label">Task Title</label>
-              <input :id="MODAL_INPUT_TITLE_ID" class="form-control" type="text" maxlength="50">
+              <input :id="MODAL_INPUT_TITLE_ID" class="form-control" type="text" maxlength="50" @keyup="updateCharacters">
               <div :id="MODAL_HELPER_TITLE_ID" class="form-text">0/50 characters</div>
             </div>
             <div class="mb-3">
