@@ -26,8 +26,9 @@ defineProps({
                 <img src="../assets/logo.svg" alt="Logo" width="24" height="24" class="d-inline-block align-text-top">
                 {{ title }}
             </span>
-
-            <button :id=BUTTON_TOGGLE_MODAL_ID class="btn btn-outline-primary">Create new task</button>
+            <button :id="BUTTON_TOGGLE_MODAL_ID" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+              Create new task
+            </button>
         </div>
     </nav>
-</template>x
+</template>
