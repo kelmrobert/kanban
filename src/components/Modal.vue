@@ -62,9 +62,9 @@ defineProps({
               <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Select tags
               </button>
-              <ul class="dropdown-menu">
-                <li v-for="tag in tags">
-                  <input type="checkbox" id="{{ 'modalCheckbox' + tag }}">
+              <ul class="dropdown-menu form-check">
+                <li class="dropdown-item form-check" v-for="tag in tags">
+                  <input type="checkbox" id="{{ 'modalCheckbox' + tag }}" class="me-2 form-check-inline">
                   <Tag :tagValue="tag"></Tag>
                 </li>
               </ul>
