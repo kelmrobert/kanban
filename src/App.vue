@@ -57,11 +57,15 @@ onMounted(() => {
     loadTags()
     loadColumns()
 });
+
+function addTask(){
+  console.log('ToDo: Task hinzufügen')
+}
 </script>
 
 <template>
     <!-- TODO: add Modal component and event handling -->
     <Header :title="title" />
     <Board :columns="columns" />
-    <Modal :columns="columns" :tags="tags" />
+    <Modal :columns="columns" :tags="tags" @submitModal="addTask"/>
 </template>

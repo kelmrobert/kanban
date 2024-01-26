@@ -85,7 +85,7 @@ function updateCharacters(){
           </div>
           <div class="modal-footer">
             <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary">Save changes</button>
+            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" @click="$emit('submitModal')" data-bs-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
