@@ -59,6 +59,7 @@ onMounted(() => {
 });
 
 function addTask(){
+  // ToDo: Retrieve new Task data and add to Array
   console.log('ToDo: Task hinzufügen')
 }
 </script>

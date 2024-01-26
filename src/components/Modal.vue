@@ -38,6 +38,8 @@ function updateCharacters(){
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
 }
 
+// TODO Clear Modal after Submit or Closing
+
 </script>
 
 <template>
