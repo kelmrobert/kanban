@@ -58,7 +58,7 @@ onMounted(() => {
     loadColumns()
 });
 
-function addTask(columnName, taskTitle, taskText){
+function addTask(columnName, taskTitle, taskText, selectedTags){
 
   // Calculate new ID
   let newID = 0
@@ -77,7 +77,7 @@ function addTask(columnName, taskTitle, taskText){
     id: newID,
     title: taskTitle,
     text: taskText,
-    tags: []
+    tags: selectedTags,
   }
 
   // Find correct column to insert task
