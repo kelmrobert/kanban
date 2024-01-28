@@ -34,7 +34,8 @@ defineProps({
 });
 
 function updateCharacters(){
-  let numOfChars = document.getElementById(MODAL_INPUT_TITLE_ID).value.length;
+  let modalInputTitle = document.getElementById(MODAL_INPUT_TITLE_ID)
+  let numOfChars = modalInputTitle.value.length;
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
 }
 
@@ -87,7 +88,7 @@ function updateCharacters(){
           </div>
           <div class="modal-footer">
             <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" @click="$emit('submitModal')" data-bs-dismiss="modal">Save changes</button>
+            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="$emit('submitModal')" >Save changes</button>
           </div>
         </div>
       </div>
