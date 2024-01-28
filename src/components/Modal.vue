@@ -50,6 +50,15 @@ function submitModal() {
   let taskText = document.getElementById(MODAL_INPUT_TEXT_ID).value
 
   // TODO Retrieve Tags
+  let tagArray = []
+  this.tags.forEach(tag => {
+    let tagCheckbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag).value
+    if(tagCheckbox) {
+      tagArray.push(tag)
+    }
+  })
+
+  console.log(tagArray)
 
   // Pass data to parent
   emit('submitModal', columnName, taskTitle, taskText);
