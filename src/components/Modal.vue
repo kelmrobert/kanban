@@ -1,6 +1,7 @@
 <script setup>
 
 import Tag from "@/components/Tag.vue";
+import { defineEmits } from 'vue';
 
 ///////////////////////////////////////////////
 // IDs to be used for the respective DOM elements in the template
@@ -22,6 +23,8 @@ const MODAL_BUTTON_SUBMIT = 'modalButtonSubmit' // for the modal's submit button
 // Your implementation below
 ///////////////////////////////////////////////
 
+const emit = defineEmits(['submitModal']);
+
 defineProps({
   columns: {
     type: Array,
@@ -39,7 +42,18 @@ function updateCharacters(){
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
 }
 
-// TODO Clear Modal after Submit or Closing
+function submitModal() {
+
+  // Retrieve modal data
+  let columnName = document.getElementById(MODAL_SELECT_COLUMN_ID).value
+  let taskTitle = document.getElementById(MODAL_INPUT_TITLE_ID).value
+  let taskText = document.getElementById(MODAL_INPUT_TEXT_ID).value
+
+  // TODO Retrieve Tags
+
+  // Pass data to parent
+  emit('submitModal', columnName, taskTitle, taskText);
+}
 
 </script>
 
@@ -88,7 +102,7 @@ function updateCharacters(){
           </div>
           <div class="modal-footer">
             <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="$emit('submitModal')" >Save changes</button>
+            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="submitModal" >Save changes</button>
           </div>
         </div>
       </div>
