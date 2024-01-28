@@ -71,6 +71,21 @@ function addTask(columnName, taskTitle, taskText){
     })
   })
   newID = 't' + newID
+
+  // Define new Task
+  let newTask = {
+    id: newID,
+    title: taskTitle,
+    text: taskText,
+    tags: []
+  }
+
+  // Find correct column to insert task
+  columns.value.forEach(column => {
+    if(column.name === columnName){
+      column.tasks.push(newTask)
+    }
+  })
 }
 </script>
 
