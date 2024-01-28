@@ -42,26 +42,24 @@ function updateCharacters(){
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
 }
 
-function submitModal() {
+function submitModal(tags) {
 
   // Retrieve modal data
   let columnName = document.getElementById(MODAL_SELECT_COLUMN_ID).value
   let taskTitle = document.getElementById(MODAL_INPUT_TITLE_ID).value
   let taskText = document.getElementById(MODAL_INPUT_TEXT_ID).value
 
-  // TODO Retrieve Tags
-  let tagArray = []
-  this.tags.forEach(tag => {
-    let tagCheckbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag).value
-    if(tagCheckbox) {
-      tagArray.push(tag)
+  // Retrieve Tags
+  let selectedTags = [];
+  tags.forEach(tag => {
+    let checkbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag);
+    if(checkbox.checked){
+      selectedTags.push(tag)
     }
-  })
-
-  console.log(tagArray)
+  });
 
   // Pass data to parent
-  emit('submitModal', columnName, taskTitle, taskText);
+  emit('submitModal', columnName, taskTitle, taskText, selectedTags);
 }
 
 </script>
@@ -103,7 +101,7 @@ function submitModal() {
               </button>
               <ul :id="MODAL_DROPDOWN_MENU_ID" class="dropdown-menu form-check">
                 <li class="dropdown-item form-check" v-for="tag in tags">
-                  <input type="checkbox" id="{{ MODAL_CHECKBOX_BASE_ID + tag }}" class="me-2 form-check-inline">
+                  <input type="checkbox" :id="MODAL_CHECKBOX_BASE_ID + tag" class="me-2 form-check-inline">
                   <Tag :tagValue="tag"></Tag>
                 </li>
               </ul>
@@ -111,7 +109,7 @@ function submitModal() {
           </div>
           <div class="modal-footer">
             <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="submitModal" >Save changes</button>
+            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="submitModal(tags)" >Save changes</button>
           </div>
         </div>
       </div>
