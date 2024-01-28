@@ -90,7 +90,6 @@ function addTask(columnName, taskTitle, taskText, selectedTags){
 </script>
 
 <template>
-    <!-- TODO: add Modal component and event handling -->
     <Header :title="title" />
     <Board :columns="columns" />
     <Modal :columns="columns" :tags="tags" @submitModal="addTask"/>

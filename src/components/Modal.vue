@@ -60,6 +60,23 @@ function submitModal(tags) {
 
   // Pass data to parent
   emit('submitModal', columnName, taskTitle, taskText, selectedTags);
+
+  // Clear modal data
+  clearModalData(tags);
+}
+
+function clearModalData(tags) {
+  // Clear modal data
+  document.getElementById(MODAL_SELECT_COLUMN_ID).value = '';
+  document.getElementById(MODAL_INPUT_TITLE_ID).value = '';
+  document.getElementById(MODAL_INPUT_TEXT_ID).value = '';
+  document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = '0/50 characters';
+
+  // Clear selected tags
+  tags.forEach(tag => {
+    let checkbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag);
+    checkbox.checked = false;
+  });
 }
 
 </script>
