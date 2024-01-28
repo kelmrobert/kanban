@@ -58,9 +58,19 @@ onMounted(() => {
     loadColumns()
 });
 
-function addTask(){
-  // ToDo: Retrieve new Task data and add to Array
-  console.log('ToDo: Task hinzufügen')
+function addTask(columnName, taskTitle, taskText){
+
+  // Calculate new ID
+  let newID = 0
+  columns.value.forEach(column => {
+    column.tasks.forEach(task => {
+      let taskIdNumber = parseInt(task.id.substring(1))
+      if(taskIdNumber >= newID){
+        newID = taskIdNumber + 1
+      }
+    })
+  })
+  newID = 't' + newID
 }
 </script>
 
