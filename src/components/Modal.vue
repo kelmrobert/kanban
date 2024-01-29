@@ -1,7 +1,7 @@
 <script setup>
 
 import Tag from "@/components/Tag.vue";
-import {defineEmits} from 'vue';
+import {defineEmits, onMounted} from 'vue';
 
 ///////////////////////////////////////////////
 // IDs to be used for the respective DOM elements in the template
@@ -50,9 +50,6 @@ function submitModal(tags) {
 
   // Pass data to parent
   emit('submitModal', columnName, taskTitle, taskText, selectedTags);
-
-  // Clear modal data
-  clearModalData(tags);
 }
 
 function clearModalData(tags) {
@@ -68,6 +65,13 @@ function clearModalData(tags) {
     checkbox.checked = false;
   });
 }
+
+onMounted(() => {
+  let modal = document.getElementById(MODAL_ID);
+  modal.addEventListener('hidden.bs.modal', () => {
+    clearModalData(props.tags);
+  });
+});
 
 </script>
 
