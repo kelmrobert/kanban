@@ -1,7 +1,7 @@
 <script setup>
 
 import Tag from "@/components/Tag.vue";
-import {defineEmits, onMounted} from 'vue';
+import {defineEmits} from 'vue';
 
 ///////////////////////////////////////////////
 // IDs to be used for the respective DOM elements in the template
@@ -32,7 +32,7 @@ function updateCharacters(){
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = numOfChars + "/50 characters";
 }
 
-function submitModal(tags) {
+function submitModal() {
 
   // Retrieve modal data
   let columnName = document.getElementById(MODAL_SELECT_COLUMN_ID).value
@@ -41,7 +41,7 @@ function submitModal(tags) {
 
   // Retrieve Tags
   let selectedTags = [];
-  tags.forEach(tag => {
+  props.tags.forEach(tag => {
     let checkbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag);
     if(checkbox.checked){
       selectedTags.push(tag)
@@ -50,33 +50,28 @@ function submitModal(tags) {
 
   // Pass data to parent
   emit('submitModal', columnName, taskTitle, taskText, selectedTags);
+
+  clearModalData()
 }
 
-function clearModalData(tags) {
+function clearModalData() {
   // Clear modal data
-  document.getElementById(MODAL_SELECT_COLUMN_ID).value = '';
+  document.getElementById(MODAL_SELECT_COLUMN_ID).value = props.columns[0].name;
   document.getElementById(MODAL_INPUT_TITLE_ID).value = '';
   document.getElementById(MODAL_INPUT_TEXT_ID).value = '';
   document.getElementById(MODAL_HELPER_TITLE_ID).innerHTML = '0/50 characters';
 
   // Clear selected tags
-  tags.forEach(tag => {
+  props.tags.forEach(tag => {
     let checkbox = document.getElementById(MODAL_CHECKBOX_BASE_ID + tag);
     checkbox.checked = false;
   });
 }
 
-onMounted(() => {
-  let modal = document.getElementById(MODAL_ID);
-  modal.addEventListener('hidden.bs.modal', () => {
-    clearModalData(props.tags);
-  });
-});
-
 </script>
 
 <template>
-    <div :id="MODAL_ID" class="modal" tabindex="-1">
+    <div :id="MODAL_ID" class="modal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -90,7 +85,8 @@ onMounted(() => {
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close">
+                    aria-label="Close"
+                    @click="clearModalData">
             </button>
           </div>
           <div class="modal-body">
@@ -119,8 +115,8 @@ onMounted(() => {
             </div>
           </div>
           <div class="modal-footer">
-            <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="submitModal(tags)" >Save changes</button>
+            <button :id="MODAL_BUTTON_CANCEL" type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="clearModalData()">Close</button>
+            <button :id="MODAL_BUTTON_SUBMIT" type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="submitModal()" >Save changes</button>
           </div>
         </div>
       </div>
