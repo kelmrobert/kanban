@@ -1,7 +1,7 @@
 <script setup>
 
 import Tag from "@/components/Tag.vue";
-import { defineEmits } from 'vue';
+import {defineEmits} from 'vue';
 
 ///////////////////////////////////////////////
 // IDs to be used for the respective DOM elements in the template
@@ -24,17 +24,7 @@ const MODAL_BUTTON_SUBMIT = 'modalButtonSubmit' // for the modal's submit button
 ///////////////////////////////////////////////
 
 const emit = defineEmits(['submitModal']);
-
-defineProps({
-  columns: {
-    type: Array,
-    required: true
-  },
-  tags: {
-    type: Array,
-    required: true
-  }
-});
+const props = defineProps(['columns', 'tags']);
 
 function updateCharacters(){
   let modalInputTitle = document.getElementById(MODAL_INPUT_TITLE_ID)
