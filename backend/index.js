@@ -1,0 +1,27 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const path = require('path')
+
+///////////////////////////
+// Data initialization
+///////////////////////////
+
+//TODO: implement (see 6.1.1)
+
+///////////////////////////
+// Server setup
+///////////////////////////
+
+//TODO: implement (see 6.1.2)
+
+///////////////////////////
+// CRUD operations
+///////////////////////////
+
+//TODO: implement (see 6.1.3 - 6.1.9)
+
+///////////////////////////
+// Start the server
+///////////////////////////
+
+//TODO: implement (see 6.1.2)
