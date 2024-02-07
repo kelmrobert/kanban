@@ -39,8 +39,11 @@ app.listen(port, () => console.log(`Express Server ist listening on port ${port}
 
 // Get taskIdCounter
 app.get('/api/counter', (req, res) => {
-    console.log(taskIdCounter)
     res.status(200).json({taskIdCounter: taskIdCounter});
+});
+
+app.get('/api/tags', (req, res) => {
+    res.status(200).json(tags);
 });
 
 ///////////////////////////
