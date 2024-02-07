@@ -55,15 +55,9 @@ app.get('/api/columns', (req, res) => {
 app.post('/api/tasks', (req, res) => {
     const { column, title, text, taskTags } = req.body;
 
-    console.log(req.body)
-    console.log(column, title, text, taskTags)
-
     const newTaskId = 't' + (++taskIdCounter);
     const columnObj = columns.find(col => col.id === column);
     const newTask = { id: newTaskId, title: title, text: text, tags: taskTags };
-
-    console.log(newTaskId)
-    console.log(columnObj)
 
     columnObj.tasks.push(newTask);
 
