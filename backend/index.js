@@ -42,8 +42,14 @@ app.get('/api/counter', (req, res) => {
     res.status(200).json({taskIdCounter: taskIdCounter});
 });
 
+// Get tags
 app.get('/api/tags', (req, res) => {
     res.status(200).json(tags);
+});
+
+// Get columns
+app.get('/api/columns', (req, res) => {
+    res.status(200).json(columns);
 });
 
 ///////////////////////////
