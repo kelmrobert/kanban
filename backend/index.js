@@ -69,8 +69,6 @@ app.put('/api/tasks/:id', (req, res) => {
     const id = req.params.id;
     const { title, text, taskTags } = req.body;
 
-    console.log(id);
-
     let taskFound = false;
     columns.forEach(column => {
         column.tasks.forEach(task => {
@@ -92,6 +90,34 @@ app.put('/api/tasks/:id', (req, res) => {
         res.status(404).json({ message: 'Task not found' });
     }
 });
+
+// Delete task
+app.delete('/api/tasks/:id', (req, res) => {
+    const id = req.params.id;
+
+    let taskFound = false;
+    let taskIndex = -1;
+    let columnIndex = -1;
+
+    // Search for the task and its index
+    for (let i = 0; i < columns.length && taskFound === false; i++) {
+        taskIndex = columns[i].tasks.findIndex(task => task.id === id);
+        if (taskIndex !== -1) {
+            columnIndex = i;
+            taskFound = true;
+            break; // Stop the loop once the task is found
+        }
+    }
+
+    // If the task was found, remove it
+    if (taskFound) {
+        columns[columnIndex].tasks.splice(taskIndex, 1); // Remove 1 item at taskIndex
+        res.status(200).json({ message: 'Task removed' });
+    } else {
+        res.status(404).json({ message: 'Task not found' });
+    }
+});
+
 
 ///////////////////////////
 // Start the server
