@@ -5,6 +5,9 @@ const path = require('path');
 ///////////////////////////
 // Data initialization
 ///////////////////////////
+
+//TODO: implement (see 6.1.1)
+
 const columns = require('./data/columns.json');
 const tags = require('./data/tags.json');
 
@@ -12,8 +15,6 @@ let taskIdCounter = 1;
 taskIdCounter = columns.forEach(column => {
     taskIdCounter += column.tasks.length;
 });
-
-//TODO: implement (see 6.1.1)
 
 ///////////////////////////
 // Server setup
