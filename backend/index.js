@@ -37,6 +37,8 @@ app.listen(port, () => console.log(`Express Server ist listening on port ${port}
 
 //TODO: implement (see 6.1.3 - 6.1.9)
 
+app.use(bodyParser.json())
+
 // Get taskIdCounter
 app.get('/api/counter', (req, res) => {
     res.status(200).json({taskIdCounter: taskIdCounter});
@@ -51,6 +53,25 @@ app.get('/api/tags', (req, res) => {
 app.get('/api/columns', (req, res) => {
     res.status(200).json(columns);
 });
+
+// Add new tasks to column
+app.post('/api/tasks', (req, res) => {
+    const { column, title, text, taskTags } = req.body;
+
+    console.log(req.body)
+    console.log(column, title, text, taskTags)
+
+    const newTaskId = 't' + (++taskIdCounter);
+    const columnObj = columns.find(col => col.id === column);
+    const newTask = { id: newTaskId, title: title, text: text, tags: taskTags };
+
+    console.log(newTaskId)
+    console.log(columnObj)
+
+    columnObj.tasks.push(newTask);
+
+    res.status(201).json({id: newTaskId});
+})
 
 ///////////////////////////
 // Start the server
