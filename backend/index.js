@@ -13,7 +13,7 @@ const tags = require('./data/tags.json');
 const http = require("http");
 
 let taskIdCounter = 1;
-taskIdCounter = columns.forEach(column => {
+columns.forEach(column => {
     taskIdCounter += column.tasks.length;
 });
 
@@ -21,11 +21,9 @@ taskIdCounter = columns.forEach(column => {
 // Server setup
 ///////////////////////////
 
+const app = express();
 const port = 3000;
 
-http.createServer((req, res) => {
-    
-}).listen(port, () => console.log(`Node.js server listening on port ${port}...`));
 
 ///////////////////////////
 // CRUD operations
