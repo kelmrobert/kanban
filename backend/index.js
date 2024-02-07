@@ -28,9 +28,6 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html')) // TODO correct?
 });
 
-app.listen(port, () => console.log(`Express Server ist listening on port ${port}...`));
-
-
 ///////////////////////////
 // CRUD operations
 ///////////////////////////
@@ -77,4 +74,4 @@ app.post('/api/tasks', (req, res) => {
 // Start the server
 ///////////////////////////
 
-//TODO: implement (see 6.1.2)
+app.listen(port, () => console.log(`Express Server ist listening on port ${port}...`));
