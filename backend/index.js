@@ -62,7 +62,36 @@ app.post('/api/tasks', (req, res) => {
     columnObj.tasks.push(newTask);
 
     res.status(201).json({id: newTaskId});
-})
+});
+
+// Update task
+app.put('/api/tasks/:id', (req, res) => {
+    const id = req.params.id;
+    const { title, text, taskTags } = req.body;
+
+    console.log(id);
+
+    let taskFound = false;
+    columns.forEach(column => {
+        column.tasks.forEach(task => {
+            if(task.id === id){
+                task.title = title;
+                task.text = text;
+                task.tags = taskTags;
+
+                taskFound = true;
+            }
+        });
+    });
+
+    if (taskFound) {
+        // Task updated
+        res.status(200).json({ message: 'Task updated' });
+    } else {
+        // Task not found
+        res.status(404).json({ message: 'Task not found' });
+    }
+});
 
 ///////////////////////////
 // Start the server
