@@ -5,6 +5,8 @@ const path = require('path')
 ///////////////////////////
 // Data initialization
 ///////////////////////////
+const columns = require('./data/columns.json')
+const tags = require('./data/tags.json')
 
 //TODO: implement (see 6.1.1)
 
