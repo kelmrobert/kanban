@@ -93,7 +93,7 @@ async function deleteTask(taskId) {
 }
 
 async function moveTask(taskId, newColumnId) {
-  await fetch(`api/tasks/` + taskId, {
+  await fetch(`api/move-task/` + taskId, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
