@@ -23,8 +23,10 @@ const app = express();
 const port = 3000;
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html')) // TODO correct?
+    res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'))
 });
+
+app.use('/assets', express.static(path.join(__dirname, '../frontend/dist/assets')));
 
 ///////////////////////////
 // CRUD operations
