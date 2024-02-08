@@ -6,8 +6,6 @@ const path = require('path');
 // Data initialization
 ///////////////////////////
 
-//TODO: implement (see 6.1.1)
-
 const columns = require('./data/columns.json');
 const tags = require('./data/tags.json');
 const http = require("http");
