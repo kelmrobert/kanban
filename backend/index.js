@@ -8,7 +8,6 @@ const path = require('path');
 
 const columns = require('./data/columns.json');
 const tags = require('./data/tags.json');
-const http = require("http");
 
 let taskIdCounter = 1;
 columns.forEach(column => {
@@ -28,13 +27,11 @@ app.get('/', (req, res) => {
 
 app.use('/assets', express.static(path.join(__dirname, '../frontend/dist/assets')));
 
+app.use(bodyParser.json())
+
 ///////////////////////////
 // CRUD operations
 ///////////////////////////
-
-//TODO: implement (see 6.1.3 - 6.1.9)
-
-app.use(bodyParser.json())
 
 // Get taskIdCounter
 app.get('/api/counter', (req, res) => {
@@ -57,7 +54,12 @@ app.post('/api/tasks', (req, res) => {
 
     const newTaskId = 't' + (++taskIdCounter);
     const columnObj = columns.find(col => col.id === column);
-    const newTask = { id: newTaskId, title: title, text: text, tags: taskTags };
+    const newTask = {
+        id: newTaskId,
+        title: title,
+        text: text,
+        tags: taskTags
+    };
 
     columnObj.tasks.push(newTask);
 
