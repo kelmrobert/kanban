@@ -52,7 +52,7 @@ async function loadColumns() {
 }
 
 async function createTask(columnId, taskTitle, taskText, taskTags) {
-    await fetch(`api/tasks`, {
+    await fetch('api/tasks', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ async function createTask(columnId, taskTitle, taskText, taskTags) {
 }
 
 async function editTask(taskId, taskTitle, taskText, taskTags) {
-  await fetch(`api/tasks/` + taskId, {
+  await fetch('api/tasks/' + taskId, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -85,7 +85,7 @@ async function editTask(taskId, taskTitle, taskText, taskTags) {
 }
 
 async function deleteTask(taskId) {
-  await fetch(`api/tasks/` + taskId, {
+  await fetch('api/tasks/' + taskId, {
     method: 'DELETE'
   });
 
@@ -93,7 +93,7 @@ async function deleteTask(taskId) {
 }
 
 async function moveTask(taskId, newColumnId) {
-  await fetch(`api/move-task/` + taskId, {
+  await fetch('api/move-task/' + taskId, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
