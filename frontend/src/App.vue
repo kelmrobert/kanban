@@ -41,27 +41,69 @@ function triggerEdit(taskId) {
 ////////////////////////////////////////////////////////////////
 
 async function loadTags() {
-    //TODO: implement (see 6.2 / 6.1.4)
+    const response = await fetch('/api/tags');
+    tags.value = await response.json();
 }
 
 async function loadColumns() {
-    //TODO: implement (see 6.2 / 6.1.5)
+    const response = await fetch('/api/columns');
+    columns.value = await response.json();
+
 }
 
 async function createTask(columnId, taskTitle, taskText, taskTags) {
-    //TODO: implement (see 6.2 / 6.1.6)
+    await fetch(`api/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        column: columnId,
+        title: taskTitle,
+        text: taskText,
+        taskTags: taskTags
+      })
+    });
+
+  await loadColumns();
 }
 
 async function editTask(taskId, taskTitle, taskText, taskTags) {
-    //TODO: implement (see 6.2 / 6.1.7)
+  await fetch(`api/tasks/` + taskId, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: taskTitle,
+      text: taskText,
+      taskTags: taskTags
+    })
+  });
+
+  await loadColumns();
 }
 
 async function deleteTask(taskId) {
-    //TODO: implement (see 6.2 / 6.1.8)
+  await fetch(`api/tasks/` + taskId, {
+    method: 'DELETE'
+  });
+
+  await loadColumns();
 }
 
 async function moveTask(taskId, newColumnId) {
-    //TODO: implement (see 6.2 / 6.1.9)
+  await fetch(`api/tasks/` + taskId, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      newColumnId: newColumnId,
+    })
+  });
+
+  await loadColumns();
 }
 
 onMounted(() => {
