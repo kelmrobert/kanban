@@ -85,10 +85,8 @@ app.put('/api/tasks/:id', (req, res) => {
     });
 
     if (taskFound) {
-        // Task updated
         res.status(200).json({ message: 'Task updated' });
     } else {
-        // Task not found
         res.status(404).json({ message: 'Task not found' });
     }
 });
@@ -101,19 +99,17 @@ app.delete('/api/tasks/:id', (req, res) => {
     let taskIndex = -1;
     let columnIndex = -1;
 
-    // Search for the task and its index
     for (let i = 0; i < columns.length && taskFound === false; i++) {
         taskIndex = columns[i].tasks.findIndex(task => task.id === id);
         if (taskIndex !== -1) {
             columnIndex = i;
             taskFound = true;
-            break; // Stop the loop once the task is found
+            break;
         }
     }
 
-    // If the task was found, remove it
     if (taskFound) {
-        columns[columnIndex].tasks.splice(taskIndex, 1); // Remove 1 item at taskIndex
+        columns[columnIndex].tasks.splice(taskIndex, 1);
         res.status(200).json({ message: 'Task removed' });
     } else {
         res.status(404).json({ message: 'Task not found' });
@@ -132,21 +128,19 @@ app.put('/api/move-task/:id', (req, res) => {
     let columnIndex = -1;
     let taskToMove = null;
 
-    // Search for the task and its index
     for (let i = 0; i < columns.length && taskFound === false; i++) {
         taskIndex = columns[i].tasks.findIndex(task => task.id === id);
         if (taskIndex !== -1) {
             columnIndex = i;
             taskFound = true;
             taskToMove = columns[i].tasks[taskIndex];
-            break; // Stop the loop once the task is found
+            break;
         }
     }
 
-    // If the task was found, remove it from its current column and add it to the new column
     if (taskFound) {
-        columns[columnIndex].tasks.splice(taskIndex, 1); // Remove 1 item at taskIndex
-        newColumn.tasks.push(taskToMove); // Add the task to the new column
+        columns[columnIndex].tasks.splice(taskIndex, 1);
+        newColumn.tasks.push(taskToMove);
         res.status(200).json({ message: 'Task moved' });
     } else {
         res.status(404).json({ message: 'Task not found' });
