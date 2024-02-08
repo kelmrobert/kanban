@@ -128,6 +128,7 @@ app.put('/api/move-task/:id', (req, res) => {
     let taskFound = false;
     let taskIndex = -1;
     let columnIndex = -1;
+    let taskToMove = null;
 
     // Search for the task and its index
     for (let i = 0; i < columns.length && taskFound === false; i++) {
@@ -135,14 +136,15 @@ app.put('/api/move-task/:id', (req, res) => {
         if (taskIndex !== -1) {
             columnIndex = i;
             taskFound = true;
-            newColumn.tasks.push(taskFound)
+            taskToMove = columns[i].tasks[taskIndex];
             break; // Stop the loop once the task is found
         }
     }
 
-    // If the task was found, remove it
+    // If the task was found, remove it from its current column and add it to the new column
     if (taskFound) {
         columns[columnIndex].tasks.splice(taskIndex, 1); // Remove 1 item at taskIndex
+        newColumn.tasks.push(taskToMove); // Add the task to the new column
         res.status(200).json({ message: 'Task moved' });
     } else {
         res.status(404).json({ message: 'Task not found' });
