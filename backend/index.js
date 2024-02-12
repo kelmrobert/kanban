@@ -35,7 +35,9 @@ app.use(bodyParser.json())
 
 // Get taskIdCounter
 app.get('/api/counter', (req, res) => {
-    res.status(200).json({taskIdCounter: taskIdCounter});
+    res.status(200).json({
+        taskIdCounter: taskIdCounter
+    });
 });
 
 // Get tags
@@ -63,7 +65,9 @@ app.post('/api/tasks', (req, res) => {
 
     columnObj.tasks.push(newTask);
 
-    res.status(201).json({id: newTaskId});
+    res.status(201).json({
+        id: newTaskId
+    });
 });
 
 // Update task
@@ -85,65 +89,60 @@ app.put('/api/tasks/:id', (req, res) => {
     });
 
     if (taskFound) {
-        res.status(200).json({ message: 'Task updated' });
+        res.status(200).json({
+            message: 'Task updated'
+        });
     } else {
-        res.status(404).json({ message: 'Task not found' });
+        res.status(404).json({
+            message: 'Task not found'
+        });
     }
 });
 
 // Delete task
 app.delete('/api/tasks/:id', (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
 
-    let taskFound = false;
-    let taskIndex = -1;
-    let columnIndex = -1;
-
-    for (let i = 0; i < columns.length && taskFound === false; i++) {
-        taskIndex = columns[i].tasks.findIndex(task => task.id === id);
-        if (taskIndex !== -1) {
-            columnIndex = i;
-            taskFound = true;
-            break;
+    const column = columns.find(col => col.tasks.some(task => task.id === id));
+    if (column) {
+        const taskIndex = column.tasks.findIndex(task => task.id === id);
+        if (taskIndex > -1) {
+            column.tasks.splice(taskIndex, 1);
+            return res.status(200).json({
+                message: 'Task removed'
+            });
         }
     }
 
-    if (taskFound) {
-        columns[columnIndex].tasks.splice(taskIndex, 1);
-        res.status(200).json({ message: 'Task removed' });
-    } else {
-        res.status(404).json({ message: 'Task not found' });
-    }
+    res.status(404).json({
+        message: 'Task not found'
+    });
 });
 
 // Move task
 app.put('/api/move-task/:id', (req, res) => {
-    const id = req.params.id;
+    const { id } = req.params;
     const { newColumnId } = req.body;
-
     const newColumn = columns.find(col => col.id === newColumnId);
 
-    let taskFound = false;
-    let taskIndex = -1;
-    let columnIndex = -1;
     let taskToMove = null;
 
-    for (let i = 0; i < columns.length && taskFound === false; i++) {
-        taskIndex = columns[i].tasks.findIndex(task => task.id === id);
-        if (taskIndex !== -1) {
-            columnIndex = i;
-            taskFound = true;
-            taskToMove = columns[i].tasks[taskIndex];
-            break;
+    columns.forEach(col => {
+        const taskIndex = col.tasks.findIndex(task => task.id === id);
+        if (taskIndex > -1) {
+            taskToMove = col.tasks.splice(taskIndex, 1)[0];
         }
-    }
+    });
 
-    if (taskFound) {
-        columns[columnIndex].tasks.splice(taskIndex, 1);
+    if (taskToMove) {
         newColumn.tasks.push(taskToMove);
-        res.status(200).json({ message: 'Task moved' });
+        return res.status(200).json({
+            message: 'Task moved'
+        });
     } else {
-        res.status(404).json({ message: 'Task not found' });
+        return res.status(404).json({
+            message: 'Task not found'
+        });
     }
 });
 
