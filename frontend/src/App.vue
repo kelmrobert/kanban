@@ -41,17 +41,27 @@ function triggerEdit(taskId) {
 ////////////////////////////////////////////////////////////////
 
 async function loadTags() {
+
+  try {
     const response = await fetch('/api/tags');
     tags.value = await response.json();
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
 }
 
 async function loadColumns() {
+
+  try {
     const response = await fetch('/api/columns');
     columns.value = await response.json();
-
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
 }
 
 async function createTask(columnId, taskTitle, taskText, taskTags) {
+  try {
     await fetch('api/tasks', {
       method: 'POST',
       headers: {
@@ -65,45 +75,66 @@ async function createTask(columnId, taskTitle, taskText, taskTags) {
       })
     });
 
-  await loadColumns();
+    await loadColumns();
+
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
 }
 
 async function editTask(taskId, taskTitle, taskText, taskTags) {
-  await fetch('api/tasks/' + taskId, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      title: taskTitle,
-      text: taskText,
-      taskTags: taskTags
-    })
-  });
+  try {
+    await fetch('api/tasks/' + taskId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        title: taskTitle,
+        text: taskText,
+        taskTags: taskTags
+      })
+    });
 
-  await loadColumns();
+    await loadColumns();
+
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
 }
 
 async function deleteTask(taskId) {
-  await fetch('api/tasks/' + taskId, {
-    method: 'DELETE'
-  });
+  try {
+    await fetch('api/tasks/' + taskId, {
+      method: 'DELETE'
+    });
 
-  await loadColumns();
+    await loadColumns();
+
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
 }
 
 async function moveTask(taskId, newColumnId) {
-  await fetch('api/move-task/' + taskId, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      newColumnId: newColumnId,
-    })
-  });
 
-  await loadColumns();
+  try {
+    await fetch('api/move-task/' + taskId, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        newColumnId: newColumnId,
+      })
+    });
+
+    await loadColumns();
+
+  } catch (error) {
+    console.error('Something went wrong:', error);
+  }
+
 }
 
 onMounted(() => {
