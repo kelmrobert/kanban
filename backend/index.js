@@ -152,4 +152,4 @@ app.put('/api/move-task/:id', (req, res) => {
 // Start the server
 ///////////////////////////
 
-app.listen(port, () => console.log('Express Server ist listening on port ${port}...'));
+app.listen(port, () => console.log(`Express Server ist listening on port ${port}...`));
